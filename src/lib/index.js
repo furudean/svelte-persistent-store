@@ -1,0 +1,1 @@
+export { persistent } from "./persistent"
