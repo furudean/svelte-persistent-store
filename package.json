@@ -1,6 +1,7 @@
 {
 	"name": "@furudean/svelte-persistent-store",
-	"version": "0.2.0",
+	"version": "0.4.0",
+	"description": "Svelte store that saves and loads data from localStorage or sessionStorage",
 	"keywords": [
 		"svelte",
 		"svelte-kit",
