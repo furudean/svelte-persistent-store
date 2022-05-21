@@ -30,13 +30,11 @@ const DEFAULT_OPTIONS = Object.freeze({
 /**
  * Store that saves and loads data from `localStorage` or `sessionStorage`.
  *
- * If `Storage` is updated the store state will sync to reflect all sessions.
- *
- * By default only JSON serializable values are handled, but custom
- * serialization and deserialization functions can be provided.
- *
+ * If the `Storage` interface is updated the store state will stay in sync.
+ * 
+ * @see https://github.com/furudean/svelte-persistent-store
+ * 
  * @template {unknown} T
- *
  * @param {Options<T>} options
  */
 export function persistent(options) {
