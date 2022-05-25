@@ -11,12 +11,14 @@ This is a
 that saves and loads data from `Window.localStorage` or `Window.sessionStorage`.
 Works with Svelte Kit out of the box.
 
-The store listens to events from the `Storage` interface, and will sync its
+The store listens to events from the `Storage` interface and will sync its
 internal state upon changes. This makes debugging using the developer console
 easy, and it will update across sessions as well.
 
-By default only JSON serializable values are handled, but [custom serialization
-and deserialization functions can be provided](#custom-serialization-functions).
+By default only
+[JSON serializable values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description)
+are handled, but [custom serialization and deserialization functions can be
+provided](#custom-serialization-functions).
 
 ## Install
 
@@ -40,20 +42,19 @@ const preferences = persistent({
 
 ## Custom serialization functions
 
-Since the `Storage` interface only supports strings, data needs to be saved as
-strings. This is called serialization. By default `JSON.stringify` and
-`JSON.parse` is used.
+Since the `Storage` interface only supports strings, data needs to be converted
+to strings before saving. By default `JSON.stringify` and `JSON.parse` is used.
 
 You can pass custom serializer and deserializer functions if you require
 specific behavior when loading or saving data from `Storage`. For example, you
-can handle numbers like this:
+can handle `Date`s like this:
 
 ```js
-const persistent_number = persistent({
-	start_value: 0,
-	key: "my-persistent-number",
+const persistent_date = persistent({
+	start_value: new Date(),
+	key: "my-persistent-date",
 	storage_type: "localStorage",
-	serialize: (value) => value.toString(), // transform before saving
-	deserialize: (value) => Number(value) // transform after loading
+	serialize: (date) => date.toISOString(), // transform before saving
+	deserialize: (str) => new Date(str) // transform after loading
 })
 ```
