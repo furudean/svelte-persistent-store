@@ -2,11 +2,10 @@ import { writable } from "svelte/store"
 
 /**
  * @template {unknown} T
- *
  * @typedef {Object} Options
  *
  * @property {T} start_value
- * Initial value of the store, if there is nothing in `Storage`.
+ * If `Storage` is empty, this is the value used.
  *
  * @property {string} key
  * Key to save as in `Storage`.
@@ -31,10 +30,11 @@ const DEFAULT_OPTIONS = Object.freeze({
  * Store that saves and loads data from `localStorage` or `sessionStorage`.
  *
  * If the `Storage` interface is updated the store state will stay in sync.
- * 
+ *
  * @see https://github.com/furudean/svelte-persistent-store
- * 
+ *
  * @template {unknown} T
+ *
  * @param {Options<T>} options
  */
 export function persistent(options) {
@@ -48,14 +48,16 @@ export function persistent(options) {
 			: undefined
 
 	const store = writable(start_value, function start() {
-		if (!storage) return
-
-		sync()
-
 		/** @param {StorageEvent} event */
 		function storage_handler(event) {
 			if (event.key === key) sync()
 		}
+
+		// bail if storage is missing, this will be the case during server
+		// rendering
+		if (!storage) return
+
+		sync()
 
 		window.addEventListener("storage", storage_handler)
 
@@ -75,11 +77,11 @@ export function persistent(options) {
 
 	/**
 	 * Update store value and web storage
-	 * @param {(value: T) => T} cb
+	 * @param {(value: T) => T} updater
 	 */
-	function update(cb) {
+	function update(updater) {
 		store.update((current_value) => {
-			const new_value = cb(current_value)
+			const new_value = updater(current_value)
 
 			storage?.setItem(key, serialize(new_value))
 
@@ -94,7 +96,8 @@ export function persistent(options) {
 		if (stored_data === null || stored_data === undefined) {
 			set(start_value)
 		} else {
-			store.set(deserialize(stored_data)) // only set store value to avoid extra write
+			// only set store value, otherwise we trigger a double sync
+			store.set(deserialize(stored_data))
 		}
 	}
 
