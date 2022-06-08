@@ -25,14 +25,11 @@ npm install @furudean/svelte-persistent-store
 
 ## Use
 
-{% note %}
 
-**Note:** By default only
+> **Note**: By default only
 [JSON serializable values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description)
 are handled, but [custom serialization and deserialization functions can be
 provided](#custom-serialization-functions).
-
-{% endnote %}
 
 ```js
 import { persistent } from "@furudean/svelte-persistent-store"
