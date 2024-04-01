@@ -15,8 +15,6 @@ The store listens to events from the `Storage` interface and will sync its
 internal state upon changes. This makes debugging using the developer console
 easy, and it will update across sessions as well.
 
-[**Try the demo!**](https://svelte.dev/repl/1ba2a6b1ca4e43bbbd30232185ed2d07?version=3.48.0
-)
 ## Install
 
 ```bash
@@ -25,11 +23,10 @@ npm install @furudean/svelte-persistent-store
 
 ## Use
 
-
 > **Note**: By default only
-[JSON serializable values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description)
-are handled, but [custom serialization and deserialization functions can be
-provided](#custom-serialization-functions).
+> [JSON serializable values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#description)
+> are handled, but [custom serialization and deserialization functions can be
+> provided](#custom-serialization-functions).
 
 ```js
 import { persistent } from "@furudean/svelte-persistent-store"

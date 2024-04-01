@@ -13,27 +13,34 @@
 		"type": "git",
 		"url": "https://github.com/furudean/svelte-persistent-store.git"
 	},
+	"license": "MIT",
 	"funding": "https://github.com/sponsors/furudean",
 	"author": "Merilynn Bandy <merilynn@furudean.com> (https://www.furudean.com/)",
 	"type": "module",
 	"scripts": {
 		"check": "svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./jsconfig.json --watch",
-		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
-		"package": "svelte-kit package",
-		"prepare": "svelte-kit sync"
+		"format": "prettier --ignore-path .gitignore --write .",
+		"lint": "prettier --ignore-path .gitignore --check .",
+		"package": "svelte-package"
 	},
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
+	"files": [
+		"dist"
+	],
 	"devDependencies": {
-		"@sveltejs/kit": "^1.0.0-next.338",
-		"prettier": "^2.5.1",
-		"prettier-plugin-svelte": "^2.5.0",
-		"svelte": "^3.48.0",
-		"svelte-check": "^2.2.6",
-		"svelte2tsx": "^0.5.10",
-		"typescript": "~4.7.2"
+		"@sveltejs/package": "^2.3.0",
+		"prettier": "^3.2.5",
+		"svelte": "^4.2.12",
+		"svelte-check": "^3.6.8",
+		"typescript": "~5.4.3"
 	},
 	"peerDependencies": {
-		"svelte": "^3.48.0"
+		"svelte": "^3 || ^4"
 	}
 }
