@@ -11,7 +11,7 @@
 	],
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/furudean/svelte-persistent-store.git"
+		"url": "git+https://github.com/furudean/svelte-persistent-store.git"
 	},
 	"license": "MIT",
 	"funding": "https://github.com/sponsors/furudean",
